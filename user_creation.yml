@@ -1,0 +1,35 @@
+---
+-
+
+  hosts: ec2
+  gather_facts: true
+
+
+  tasks:
+  - name: Create users using loop_with_item
+    user:
+      name: "{{ item }}"
+      state: present
+    with_items:
+            - Kajal
+            - Krishna
+            - Pallavi
+
+
+
+  - name: Create user using loop_with_dict
+    user:
+      name: "{{ item.key }}"
+      comment: "{{ item.value.full_name}}, {{ item.value.email}}, {{ item.value.SR }}"
+    with_dict:
+            Arjun:
+              full_name: Arjun Kumthe
+              email: arjunkumthe24@gmail.com
+              SR: SR000001
+            Naagar:
+              full_name: Naagar Group
+              email: naagargroup@gmail.com
+              SR: SR000002
+
+
+...
